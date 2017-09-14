@@ -3,12 +3,12 @@ import {Route, IndexRoute} from 'react-router';
 import App from './components/App.js';
 import HomePage from './components/home/HomePage.js';
 import AboutPage from './components/about/AboutPage.js';
-import CoursesPage from './components/course/CoursesPage.js';
+import TemperaturePage from './components/temperature/TemperaturePage.js';
 
 export default(
     <Route path="/" component={App}>
         <IndexRoute component={HomePage}/>
         <Route path="about" component={AboutPage}/>
-        <Route path="courses" component={CoursesPage}/>
+        <Route path="temperature" component={TemperaturePage}/>
     </Route>
 );

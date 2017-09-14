@@ -1,13 +1,13 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as courseActions from '../../actions/courseActions';
+import * as temperatureActions from '../../actions/temperatureActions';
 
-class CoursesPage extends React.Component {
+class TemperaturePage extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            course: {
+            temperature: {
                 title: ""
             }
         };
@@ -21,22 +21,22 @@ class CoursesPage extends React.Component {
     }
 
     onTitleChange(event) {
-        const course = this.state.course;
-        course.title = event.target.value;
-        this.setState({course: course});
+        const temperature = this.state.temperature;
+        temperature.title = event.target.value;
+        this.setState({temperature: temperature});
     }
 
     onClickSave() {
         this
             .props
             .actions
-            .createCourse(this.state.course);
+            .addTemperature(this.state.temperature);
     }
 
-    courseRow(course, index) {
+    temperatureRow(temperature, index) {
         return (
             <div key={index}>
-                {course.title}
+                {temperature.title}
             </div>
         );
     }
@@ -44,16 +44,16 @@ class CoursesPage extends React.Component {
     render() {
         return (
             <div>
-                <h1>Courses</h1>
+                <h1>Temperatures</h1>
                 {this
                     .props
-                    .courses
-                    .map(this.courseRow)}
-                <h1>Add Course</h1>
+                    .temperatures
+                    .map(this.temperatureRow)}
+                <h1>Add Temperature</h1>
                 <input
                     type="text"
                     onChange={this.onTitleChange}
-                    value={this.state.course.title}/>
+                    value={this.state.temperature.title}/>
 
                 <input type="submit" value="Save" onClick={this.onClickSave}/>
             </div>
@@ -61,19 +61,19 @@ class CoursesPage extends React.Component {
     }
 }
 
-CoursesPage.propTypes = {
+TemperaturePage.propTypes = {
     actions: PropTypes.object.isRequired,
-    courses: PropTypes.array.isRequired
+    temperatures: PropTypes.array.isRequired
 };
 
 function mapStateToProps(state, ownProps) {
-    return {courses: state.courses};
+    return {temperatures: state.temperature};
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators(courseActions, dispatch)
+        actions: bindActionCreators(temperatureActions, dispatch)
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CoursesPage);
+export default connect(mapStateToProps, mapDispatchToProps)(TemperaturePage);

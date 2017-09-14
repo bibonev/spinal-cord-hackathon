@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux';
-import courses from './courseReducer';
+import temperature from './temperatureReducer';
 
-const rootReducer = combineReducers({courses});
+const rootReducer = combineReducers({temperature});
 
 export default rootReducer;

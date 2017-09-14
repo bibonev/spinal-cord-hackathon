@@ -13,7 +13,7 @@ const Header = () => {
                 </ReactBootstrap.Navbar.Header>
                 <ReactBootstrap.Nav>
                     <ReactBootstrap.NavItem eventKey={1}>
-                        <Link to="/">Temperature</Link>
+                        <Link to="/temperature">Temperature</Link>
                     </ReactBootstrap.NavItem>
                     <ReactBootstrap.NavItem eventKey={2}>
                         <Link to="/">Movement</Link>

@@ -1,11 +1,11 @@
 import * as types from '../actions/actionTypes';
 
-export default function courseReducer(state = [], action) {
+export default function temperatureReducer(state = [], action) {
     switch (action.type) {
-        case types.CREATE_COURSE:
+        case types.ADD_TEMPERATURE:
             return [
                 ...state,
-                Object.assign({}, action.course)
+                Object.assign({}, action.temperature)
             ];
         default:
             return state;
