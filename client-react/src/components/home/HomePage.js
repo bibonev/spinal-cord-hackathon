@@ -1,75 +1,105 @@
 import React from 'react';
 import {Link} from 'react-router';
 import * as ReactBootstrap from 'react-bootstrap';
-import {Chart} from 'react-d3-core';
-import {ScatterPlot} from 'react-d3-basic';
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
+
+import 'react-datepicker/dist/react-datepicker.css';
+
+const LineChart = require('zingchart-react').scatter;
 
 class HomePage extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+            startDate: moment()
+        };
+        this.handleChange = this
+            .handleChange
+            .bind(this);
+    }
+
+    handleChange(date) {
+        console.log("DATE", date.startOf('day').format('LL'));
+        this.setState({startDate: date});
+    }
+
     getMockedData() {
         return [
             {
-                "temperature": "36.6",
-                "movement": "10",
-                "pressure": "50",
-                "time": "2001M01"
+                text: "Movement",
+                values: [
+                    [
+                        8, 18
+                    ],
+                    [
+                        9, 12
+                    ],
+                    [
+                        11, 7
+                    ],
+                    [
+                        11, 14
+                    ],
+                    [
+                        12, 1
+                    ],
+                    [
+                        13, 19
+                    ],
+                    [14, 4]
+                ]
             }, {
-                "temperature": "37.6",
-                "movement": "15",
-                "pressure": "40",
-                "time": "2001M02"
+                text: "Temperature",
+                values: [
+                    [
+                        8, 37
+                    ],
+                    [
+                        9, 36.5
+                    ],
+                    [
+                        10, 36
+                    ],
+                    [
+                        11, 36.5
+                    ],
+                    [
+                        12, 37.5
+                    ],
+                    [
+                        13, 38
+                    ],
+                    [14, 36.9]
+                ]
             }, {
-                "temperature": "38.6",
-                "movement": "12",
-                "pressure": "55",
-                "time": "2001M03"
+                text: "Pressure",
+                values: [
+                    [
+                        8, 0
+                    ],
+                    [
+                        9, 1
+                    ],
+                    [
+                        10, 12
+                    ],
+                    [
+                        11, 12
+                    ],
+                    [
+                        12, 4
+                    ],
+                    [
+                        13, 6
+                    ],
+                    [14, 17]
+                ]
             }
         ];
     }
 
-    getChartProps() {
-        var parseDate = d3
-            .time
-            .format("%YM%m")
-            .parse;
-        return {
-            width: 700,
-            height: 300,
-            margins: {
-                left: 100,
-                right: 100,
-                top: 50,
-                bottom: 50
-            },
-            // chart series, field: is what field your data want to be selected name: the
-            // name of the field that display in legend color: what color is the line
-            chartSeries: [
-                {
-                    field: 'temperature',
-                    name: 'Temperature',
-                    symbol: 'diamond',
-                    symbolSize: 6
-                }, {
-                    field: 'movement',
-                    name: 'Movement',
-                    symbol: 'cross',
-                    symbolSize: 6
-                }, {
-                    field: 'pressure',
-                    name: 'Pressure',
-                    symbol: 'circle',
-                    symbolSize: 6
-                }
-            ],
-            // your x accessor
-            x: function (d) {
-                return parseDate(d.time);
-            },
-            xScale: 'time'
-        }
-    }
-
     render() {
-        const data = this.getChartProps();
         return (
             <div className="container">
                 <ReactBootstrap.Jumbotron>
@@ -77,14 +107,30 @@ class HomePage extends React.Component {
                     <p>Let's check my measurements!</p>
                 </ReactBootstrap.Jumbotron>
                 <div>
-                    <ScatterPlot
-                        data={this.getMockedData()}
-                        width={data.width}
-                        height={data.height}
-                        margins={data.margins}
-                        chartSeries={data.chartSeries}
-                        x={data.x}
-                        xScale={data.xScale}/>
+                    <div
+                        style={{
+                        display: "inline-block"
+                    }}>
+                        <LineChart
+                            id="generalMeasurements"
+                            height="600"
+                            width="900"
+                            series={this.getMockedData()}
+                            legend="true"
+                            theme="light"
+                            title=""/>
+                    </div>
+                    <div
+                        style={{
+                        display: "inline-block",
+                        position: "absolute",
+                        marginTop: "210px"
+                    }}>
+                        <DatePicker
+                            inline
+                            selected={this.state.startDate}
+                            onChange={this.handleChange}/>
+                    </div>
                 </div>
             </div>
         );
