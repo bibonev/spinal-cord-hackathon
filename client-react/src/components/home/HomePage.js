@@ -1,8 +1,11 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import * as ReactBootstrap from 'react-bootstrap';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
+import * as homeActions from '../../actions/homeActions';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -19,84 +22,16 @@ class HomePage extends React.Component {
             .bind(this);
     }
 
+    componentWillMount() {
+        this
+            .props
+            .actions
+            .getMeasurements(this.state.startDate);
+    }
+
     handleChange(date) {
         console.log("DATE", date.startOf('day').format('LL'));
         this.setState({startDate: date});
-    }
-
-    getMockedData() {
-        return [
-            {
-                text: "Movement",
-                values: [
-                    [
-                        8, 18
-                    ],
-                    [
-                        9, 12
-                    ],
-                    [
-                        11, 7
-                    ],
-                    [
-                        11, 14
-                    ],
-                    [
-                        12, 1
-                    ],
-                    [
-                        13, 19
-                    ],
-                    [14, 4]
-                ]
-            }, {
-                text: "Temperature",
-                values: [
-                    [
-                        8, 37
-                    ],
-                    [
-                        9, 36.5
-                    ],
-                    [
-                        10, 36
-                    ],
-                    [
-                        11, 36.5
-                    ],
-                    [
-                        12, 37.5
-                    ],
-                    [
-                        13, 38
-                    ],
-                    [14, 36.9]
-                ]
-            }, {
-                text: "Pressure",
-                values: [
-                    [
-                        8, 0
-                    ],
-                    [
-                        9, 1
-                    ],
-                    [
-                        10, 12
-                    ],
-                    [
-                        11, 12
-                    ],
-                    [
-                        12, 4
-                    ],
-                    [
-                        13, 6
-                    ],
-                    [14, 17]
-                ]
-            }
-        ];
     }
 
     render() {
@@ -115,7 +50,7 @@ class HomePage extends React.Component {
                             id="generalMeasurements"
                             height="600"
                             width="900"
-                            series={this.getMockedData()}
+                            series={this.props.measurements}
                             legend="true"
                             theme="light"
                             title=""/>
@@ -137,4 +72,20 @@ class HomePage extends React.Component {
     }
 }
 
-export default HomePage;
+HomePage.propTypes = {
+    actions: PropTypes.object.isRequired,
+    measurements: PropTypes.array.isRequired
+};
+
+function mapStateToProps(state, ownProps) {
+    console.log("STATE", state);
+    return {measurements: state.measurements};
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators(homeActions, dispatch)
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
