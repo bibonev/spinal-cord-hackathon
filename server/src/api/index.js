@@ -135,8 +135,21 @@ router.get('/humidity', function (req, res) {
     });
 });
 
+router.get('/temperatureNow', function (req, res) {
+    res.json({
+        temperature: {
+            room: getRandomArbitraryFloor(20, 28),
+            body: getRandomArbitraryFloor(35, 38)
+        }
+    })
+});
+
 function getRandomArbitrary(min, max) {
     return Math.round((Math.random() * (max - min) + min) * 10) / 10;
+}
+
+function getRandomArbitraryFloor(min, max) {
+    return Math.floor((Math.random() * (max - min) + min));
 }
 
 export default router

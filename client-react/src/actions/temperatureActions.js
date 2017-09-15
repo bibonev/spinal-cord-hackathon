@@ -1,5 +1,15 @@
 import * as types from './actionTypes';
 
-export function addTemperature(temperature) {
-    return {type: types.ADD_TEMPERATURE, temperature};
+export function getTmperatures() {
+    return (dispatch, getState) => {
+        let temperatureUrl = `http://0.0.0.0:9000/temperatureNow`;
+
+        $.get(temperatureUrl, dataT => {
+            dispatch(showTemperature(dataT));
+        });
+    };
+}
+
+export function showTemperature(temperature) {
+    return {type: types.GET_TEMPERATURE, temperatureNow: temperature};
 }

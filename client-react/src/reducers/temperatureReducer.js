@@ -1,12 +1,10 @@
 import * as types from '../actions/actionTypes';
 
-export default function temperatureReducer(state = [], action) {
+export default function temperatureReducer(state = {}, action) {
+    console.log("ACTION", action);
     switch (action.type) {
-        case types.ADD_TEMPERATURE:
-            return [
-                ...state,
-                Object.assign({}, action.temperature)
-            ];
+        case types.GET_TEMPERATURE:
+            return action.temperatureNow
         default:
             return state;
     }

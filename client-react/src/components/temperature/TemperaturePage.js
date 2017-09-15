@@ -2,57 +2,45 @@ import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as temperatureActions from '../../actions/temperatureActions';
-import {Thermometer} from '../common/Thermometer.js';
+import Thermometer from '../common/Thermometer.js';
+import * as ReactBootstrap from 'react-bootstrap';
 
 class TemperaturePage extends React.Component {
     constructor(props, context) {
         super(props, context);
-        this.state = {
-            temperature: {
-                title: ""
-            }
-        };
-
-        this.onTitleChange = this
-            .onTitleChange
-            .bind(this);
-        this.onClickSave = this
-            .onClickSave
-            .bind(this);
-    }
-
-    onTitleChange(event) {
-        const temperature = this.state.temperature;
-        temperature.title = event.target.value;
-        this.setState({temperature: temperature});
-    }
-
-    onClickSave() {
-        this
-            .props
-            .actions
-            .addTemperature(this.state.temperature);
-    }
-
-    temperatureRow(temperature, index) {
-        return (
-            <div key={index}>
-                {temperature.title}
-            </div>
-        );
     }
 
     render() {
         return (
             <div className="container">
-                <Thermometer
-                    theme={'light'}
-                    value={35}
-                    max={45}
-                    format={'°'}
-                    steps={3}
-                    size={'small'}
-                    height={180}/>
+                <ReactBootstrap.Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
+                    <ReactBootstrap.Tab eventKey={1} title="Room">
+                        <br/>
+                        <div className="text-center">
+                            <Thermometer
+                                theme={'light'}
+                                type={"room"}
+                                max={45}
+                                format={'°'}
+                                steps={3}
+                                size={'small'}
+                                height={180}/>
+                        </div>
+                    </ReactBootstrap.Tab>
+                    <ReactBootstrap.Tab eventKey={2} title="Body">
+                        <br/>
+                        <div className="text-center">
+                            <Thermometer
+                                theme={'light'}
+                                type={"body"}
+                                max={45}
+                                format={'°'}
+                                steps={3}
+                                size={'small'}
+                                height={180}/>
+                        </div>
+                    </ReactBootstrap.Tab>
+                </ReactBootstrap.Tabs>
             </div>
         );
     }

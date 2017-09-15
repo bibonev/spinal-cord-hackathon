@@ -1,6 +1,9 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as temperatureActions from '../../actions/temperatureActions';
 
-export class Thermometer extends React.Component {
+class Thermometer extends React.Component {
     constructor(props) {
         super(props);
 
@@ -9,6 +12,7 @@ export class Thermometer extends React.Component {
                 ? this.props.theme
                 : 'light',
             value: this.props.value || 0, //default 0
+            type: this.props.type || 'body', //default body
             max: this.props.max || 100, //default 100
             steps: this.props.steps || 4, //default 4
             format: this.props.format || '',
@@ -33,6 +37,31 @@ export class Thermometer extends React.Component {
                 .intervals
                 .push(interval);
         }
+
+        this.onTick = this
+            .onTick
+            .bind(this);
+    }
+
+    componentDidMount() {
+        this.interval = setInterval(this.onTick, 1000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.interval);
+    }
+
+    onTick() {
+        this
+            .props
+            .actions
+            .getTmperatures();
+
+        this.setState({
+            value: this.state.type === "room"
+                ? this.props.temperatures.temperature.room
+                : this.props.temperatures.temperature.body
+        });
     }
 
     render() {
@@ -88,3 +117,15 @@ export class Thermometer extends React.Component {
         );
     }
 }
+
+function mapStateToProps(state, ownProps) {
+    return {temperatures: state.temperature};
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators(temperatureActions, dispatch)
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Thermometer);
