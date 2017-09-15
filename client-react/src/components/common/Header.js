@@ -8,7 +8,7 @@ const Header = () => {
             <ReactBootstrap.Navbar>
                 <ReactBootstrap.Navbar.Header>
                     <ReactBootstrap.Navbar.Brand>
-                        <Link to="/">TSH</Link>
+                        <Link to="/">IBM</Link>
                     </ReactBootstrap.Navbar.Brand>
                 </ReactBootstrap.Navbar.Header>
                 <ReactBootstrap.Nav>
@@ -19,7 +19,7 @@ const Header = () => {
                         <Link to="/movement">Movement</Link>
                     </ReactBootstrap.NavItem>
                     <ReactBootstrap.NavItem eventKey={2}>
-                        <Link to="/pressure">Pressure</Link>
+                        <Link to="/humidity">Humidity</Link>
                     </ReactBootstrap.NavItem>
                 </ReactBootstrap.Nav>
             </ReactBootstrap.Navbar>

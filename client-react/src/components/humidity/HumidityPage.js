@@ -6,8 +6,8 @@ class PressurePage extends React.Component {
         return (
             <div className="container">
                 <ReactBootstrap.Jumbotron>
-                    <h1>Pressure</h1>
-                    <p>Pressure meassurements</p>
+                    <h1>Humidity</h1>
+                    <p>Humidity meassurements</p>
                 </ReactBootstrap.Jumbotron>
             </div>
         );

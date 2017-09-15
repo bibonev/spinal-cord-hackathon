@@ -9,7 +9,7 @@ import * as homeActions from '../../actions/homeActions';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
-const LineChart = require('zingchart-react').scatter;
+const ScatterChart = require('zingchart-react').scatter;
 
 class HomePage extends React.Component {
     constructor() {
@@ -52,7 +52,7 @@ class HomePage extends React.Component {
                         style={{
                         display: "inline-block"
                     }}>
-                        <LineChart
+                        <ScatterChart
                             id="generalMeasurements"
                             height="600"
                             width="900"

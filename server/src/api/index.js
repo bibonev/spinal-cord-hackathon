@@ -34,24 +34,33 @@ router.get('/temperature', function (req, res) {
     res.json({
         temperature: [
             [
-                8, 37
+                8,
+                getRandomArbitrary(35, 38)
             ],
             [
-                9, 36.5
+                9,
+                getRandomArbitrary(35, 38)
             ],
             [
-                10, 36
+                10,
+                getRandomArbitrary(35, 38)
             ],
             [
-                11, 36.5
+                11,
+                getRandomArbitrary(35, 38)
             ],
             [
-                12, 37.5
+                12,
+                getRandomArbitrary(35, 38)
             ],
             [
-                13, 38
+                13,
+                getRandomArbitrary(35, 38)
             ],
-            [14, 36.9]
+            [
+                14,
+                getRandomArbitrary(35, 38)
+            ]
         ]
     });
 });
@@ -60,52 +69,74 @@ router.get('/movement', function (req, res) {
     res.json({
         movement: [
             [
-                8, 9
+                8,
+                getRandomArbitrary(10, 20)
             ],
             [
-                9, 12
+                9,
+                getRandomArbitrary(10, 20)
             ],
             [
-                11, 7
+                11,
+                getRandomArbitrary(10, 20)
             ],
             [
-                11, 14
+                11,
+                getRandomArbitrary(10, 20)
             ],
             [
-                12, 1
+                12,
+                getRandomArbitrary(10, 20)
             ],
             [
-                13, 19
+                13,
+                getRandomArbitrary(10, 20)
             ],
-            [14, 4]
+            [
+                14,
+                getRandomArbitrary(10, 20)
+            ]
         ]
     });
 });
 
-router.get('/pressure', function (req, res) {
+router.get('/humidity', function (req, res) {
     res.json({
-        pressure: [
+        humidity: [
             [
-                8, 0
+                8,
+                getRandomArbitrary(0, 15)
             ],
             [
-                9, 1
+                9,
+                getRandomArbitrary(0, 15)
             ],
             [
-                10, 12
+                10,
+                getRandomArbitrary(0, 15)
             ],
             [
-                11, 12
+                11,
+                getRandomArbitrary(0, 15)
             ],
             [
-                12, 4
+                12,
+                getRandomArbitrary(0, 15)
             ],
             [
-                13, 6
+                13,
+                getRandomArbitrary(0, 15)
             ],
-            [14, 17]
+            [
+                14,
+                getRandomArbitrary(0, 15)
+            ]
         ]
     });
 });
+
+function getRandomArbitrary(min, max) {
+    return Math.random() * (max - min) + min;
+}
 
 export default router

@@ -4,23 +4,19 @@ export function getMeasurements(date) {
     return (dispatch, getState) => {
         let temperatureUrl = `http://0.0.0.0:9000/temperature`;
         let movementUrl = `http://0.0.0.0:9000/movement`;
-        let pressureUrl = `http://0.0.0.0:9000/pressure`;
-
-        let temperatureData;
-        let movementData;
-        let pressureData;
+        let humidityUrl = `http://0.0.0.0:9000/humidity`;
 
         $.get(temperatureUrl, dataT => {
             $.get(movementUrl, dataM => {
-                $.get(pressureUrl, dataP => {
-                    dispatch(showMeasurements(dataT.temperature, dataM.movement, dataP.pressure));
+                $.get(humidityUrl, dataH => {
+                    dispatch(showMeasurements(dataT.temperature, dataM.movement, dataH.humidity));
                 });
             });
         });
     };
 }
 
-export function showMeasurements(temperature, movement, pressure) {
+export function showMeasurements(temperature, movement, humidity) {
     return {
         type: types.GET_MEASUREMENTS,
         movement: {
@@ -32,8 +28,8 @@ export function showMeasurements(temperature, movement, pressure) {
             values: temperature
         },
         pressure: {
-            text: "Pressure",
-            values: pressure
+            text: "Humidity",
+            values: humidity
         }
     };
 }
