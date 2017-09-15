@@ -42,6 +42,8 @@ class TemperaturePage extends React.Component {
     }
 
     render() {
+        const data = [...this.props.temperatures];
+        console.log("SORT", data.sort());
         return (
             <div>
                 <h1>Temperatures</h1>

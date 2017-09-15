@@ -26,15 +26,21 @@ class HomePage extends React.Component {
         this
             .props
             .actions
-            .getMeasurements(this.state.startDate);
+            .getMeasurements(this.state.startDate.startOf('day').format('LL'));
     }
 
     handleChange(date) {
-        console.log("DATE", date.startOf('day').format('LL'));
+        this
+            .props
+            .actions
+            .getMeasurements(date.startOf('day').format('LL'));
         this.setState({startDate: date});
     }
 
     render() {
+        const data = [...this.props.measurements];
+
+        console.log("DATA", data);
         return (
             <div className="container">
                 <ReactBootstrap.Jumbotron>
@@ -50,7 +56,7 @@ class HomePage extends React.Component {
                             id="generalMeasurements"
                             height="600"
                             width="900"
-                            series={this.props.measurements}
+                            series={data}
                             legend="true"
                             theme="light"
                             title=""/>
@@ -78,7 +84,6 @@ HomePage.propTypes = {
 };
 
 function mapStateToProps(state, ownProps) {
-    console.log("STATE", state);
     return {measurements: state.measurements};
 }
 
