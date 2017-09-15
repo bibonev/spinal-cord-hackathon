@@ -2,6 +2,7 @@ import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as temperatureActions from '../../actions/temperatureActions';
+import {Thermometer} from '../common/Thermometer.js';
 
 class TemperaturePage extends React.Component {
     constructor(props, context) {
@@ -42,22 +43,16 @@ class TemperaturePage extends React.Component {
     }
 
     render() {
-        const data = [...this.props.temperatures];
-        console.log("SORT", data.sort());
         return (
-            <div>
-                <h1>Temperatures</h1>
-                {this
-                    .props
-                    .temperatures
-                    .map(this.temperatureRow)}
-                <h1>Add Temperature</h1>
-                <input
-                    type="text"
-                    onChange={this.onTitleChange}
-                    value={this.state.temperature.title}/>
-
-                <input type="submit" value="Save" onClick={this.onClickSave}/>
+            <div className="container">
+                <Thermometer
+                    theme={'light'}
+                    value={35}
+                    max={45}
+                    format={'°'}
+                    steps={3}
+                    size={'small'}
+                    height={180}/>
             </div>
         );
     }

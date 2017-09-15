@@ -136,7 +136,7 @@ router.get('/humidity', function (req, res) {
 });
 
 function getRandomArbitrary(min, max) {
-    return Math.random() * (max - min) + min;
+    return Math.round((Math.random() * (max - min) + min) * 10) / 10;
 }
 
 export default router
