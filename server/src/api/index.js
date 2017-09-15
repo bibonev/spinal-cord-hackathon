@@ -1,4 +1,4 @@
-import { Router } from 'express'
+import {Router} from 'express'
 
 const router = new Router()
 
@@ -25,5 +25,87 @@ const router = new Router()
  * @apiParam {String[]} [sort=-createdAt] Order of returned items.
  * @apiParam {String[]} [fields] Fields to be returned.
  */
+
+router.get('/', function (req, res) {
+    res.json({message: 'hooray! welcome to our api!'});
+});
+
+router.get('/temperature', function (req, res) {
+    res.json({
+        temperature: [
+            [
+                8, 37
+            ],
+            [
+                9, 36.5
+            ],
+            [
+                10, 36
+            ],
+            [
+                11, 36.5
+            ],
+            [
+                12, 37.5
+            ],
+            [
+                13, 38
+            ],
+            [14, 36.9]
+        ]
+    });
+});
+
+router.get('/movement', function (req, res) {
+    res.json({
+        movement: [
+            [
+                8, 9
+            ],
+            [
+                9, 12
+            ],
+            [
+                11, 7
+            ],
+            [
+                11, 14
+            ],
+            [
+                12, 1
+            ],
+            [
+                13, 19
+            ],
+            [14, 4]
+        ]
+    });
+});
+
+router.get('/pressure', function (req, res) {
+    res.json({
+        pressure: [
+            [
+                8, 0
+            ],
+            [
+                9, 1
+            ],
+            [
+                10, 12
+            ],
+            [
+                11, 12
+            ],
+            [
+                12, 4
+            ],
+            [
+                13, 6
+            ],
+            [14, 17]
+        ]
+    });
+});
 
 export default router
